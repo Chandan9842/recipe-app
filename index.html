@@ -1,22 +1,44 @@
-async function generateRecipe() {
-  const input = document.querySelector("input").value;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe Generator</title>
+</head>
+<body style="text-align:center; margin-top:100px;">
 
-  try {
-    const response = await fetch("https://9duytol1mj.execute-api.us-east-2.amazonaws.com/default/recipeGenerator", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ingredients: input
-      })
-    });
+  <h1>Recipe Generator</h1>
+  <h2>Name: Chandan Sah</h2>
 
-    const data = await response.json();
+  <input type="text" placeholder="Enter ingredients">
+  <br><br>
 
-    document.getElementById("result").innerText = data.recipe;
+  <button onclick="generateRecipe()">Generate Recipe</button>
 
-  } catch (error) {
-    document.getElementById("result").innerText = "Error: " + error.message;
-  }
-}
+  <p id="result"></p>
+
+  <script>
+    async function generateRecipe() {
+      const input = document.querySelector("input").value;
+
+      try {
+        const response = await fetch("https://9duytol1mj.execute-api.us-east-2.amazonaws.com/default/recipeGenerator", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            ingredients: input
+          })
+        });
+
+        const data = await response.json();
+
+        document.getElementById("result").innerText = data.recipe;
+
+      } catch (error) {
+        document.getElementById("result").innerText = "Error: " + error.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
