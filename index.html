@@ -1,7 +1,24 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Recipe App</h1>
+<body style="text-align:center; margin-top:100px;">
+
+<h1>Recipe Generator</h1>
 <h2>Name: Chandan Sah</h2>
+
+<input id="ingredients" placeholder="Enter ingredients" />
+<br><br>
+
+<button onclick="generate()">Generate Recipe</button>
+
+<p id="result"></p>
+
+<script>
+function generate() {
+  let input = document.getElementById("ingredients").value;
+  document.getElementById("result").innerText =
+    "Recipe generated for: " + input;
+}
+</script>
+
 </body>
 </html>
