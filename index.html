@@ -1,1 +1,22 @@
-fetch("https://9duytol1mj.execute-api.us-east-2.amazonaws.com/default/recipeGenerator", {
+async function generateRecipe() {
+  const input = document.querySelector("input").value;
+
+  try {
+    const response = await fetch("https://9duytol1mj.execute-api.us-east-2.amazonaws.com/default/recipeGenerator", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ingredients: input
+      })
+    });
+
+    const data = await response.json();
+
+    document.getElementById("result").innerText = data.recipe;
+
+  } catch (error) {
+    document.getElementById("result").innerText = "Error: " + error.message;
+  }
+}
