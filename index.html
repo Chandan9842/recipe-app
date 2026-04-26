@@ -1,17 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe Generator</title>
+</head>
+
+<body style="text-align:center; margin-top:100px;">
+
+<h1>Recipe Generator</h1>
+<h2>Name: Chandan Sah</h2>
+
+<input id="ingredients" placeholder="Enter ingredients" />
+<br><br>
+
+<button onclick="generate()">Generate Recipe</button>
+
+<p id="result"></p>
+
 <script>
 async function generate() {
   let input = document.getElementById("ingredients").value;
 
-  let response = await fetch("https://9duyto11mj.execute-api.us-east-2.amazonaws.com/default/recipeGenerator", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ ingredients: input })
-  });
+  try {
+    let response = await fetch("https://9duyto11mj.execute-api.us-east-2.amazonaws.com/default/recipeGenerator", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ingredients: input })
+    });
 
-  let data = await response.json();
+    let data = await response.json();
+    document.getElementById("result").innerText = data.body;
 
-  document.getElementById("result").innerText = data.body;
+  } catch (error) {
+    document.getElementById("result").innerText = "Error: " + error;
+  }
 }
 </script>
+
+</body>
+</html>
